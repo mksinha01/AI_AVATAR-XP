@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Phone, CheckCircle, Loader2 } from 'lucide-react';
+import { Phone } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -8,9 +7,6 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
 
 interface PhoneCallDialogProps {
   open: boolean;
@@ -18,66 +14,12 @@ interface PhoneCallDialogProps {
   counselorCategory: string;
 }
 
+const N8N_FORM_URL = 'http://localhost:5678/form/0751fa66-da39-4b7a-8d29-c0b9e8d4f722';
+
 export function PhoneCallDialog({ open, onOpenChange, counselorCategory }: PhoneCallDialogProps) {
-  const [phone, setPhone] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { toast } = useToast();
-
-  const formatPhone = (value: string) => {
-    const digits = value.replace(/\D/g, '').slice(0, 10);
-    if (digits.length >= 6) {
-      return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
-    } else if (digits.length >= 3) {
-      return `${digits.slice(0, 3)}-${digits.slice(3)}`;
-    }
-    return digits;
-  };
-
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhone(formatPhone(e.target.value));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    const digits = phone.replace(/\D/g, '');
-    if (digits.length !== 10) {
-      toast({
-        title: 'Invalid phone number',
-        description: 'Please enter a valid 10-digit phone number.',
-        variant: 'destructive',
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      // This would call your n8n webhook in production
-      // For now, simulate the API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      setIsSuccess(true);
-      toast({
-        title: 'Call request submitted',
-        description: 'You will receive a call shortly from our AI counselor.',
-      });
-
-      setTimeout(() => {
-        onOpenChange(false);
-        setIsSuccess(false);
-        setPhone('');
-      }, 2000);
-    } catch (error) {
-      toast({
-        title: 'Request failed',
-        description: 'Unable to submit call request. Please try again.',
-        variant: 'destructive',
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handleOpenForm = () => {
+    window.open(N8N_FORM_URL, '_blank');
+    onOpenChange(false);
   };
 
   return (
@@ -91,69 +33,33 @@ export function PhoneCallDialog({ open, onOpenChange, counselorCategory }: Phone
             Schedule Voice Call
           </DialogTitle>
           <DialogDescription>
-            Enter your phone number and our AI counselor will call you for a {counselorCategory} session.
+            Fill out the form to schedule a voice call for your {counselorCategory.replace(/-/g, ' ')} session.
           </DialogDescription>
         </DialogHeader>
 
-        {isSuccess ? (
-          <div className="flex flex-col items-center justify-center py-8">
-            <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-wellness/10">
-              <CheckCircle className="h-8 w-8 text-wellness" />
-            </div>
-            <h3 className="text-lg font-semibold text-foreground">Call Scheduled!</h3>
-            <p className="text-center text-sm text-muted-foreground">
-              You will receive a call shortly.
-            </p>
+        <div className="py-4">
+          <p className="text-sm text-muted-foreground mb-4">
+            You'll be redirected to our scheduling form where you can enter your details and preferred call time.
+          </p>
+          
+          <div className="flex gap-3">
+            <Button
+              variant="outline"
+              onClick={() => onOpenChange(false)}
+              className="flex-1"
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="hero"
+              onClick={handleOpenForm}
+              className="flex-1"
+            >
+              <Phone className="h-4 w-4" />
+              Open Form
+            </Button>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="phone">Phone Number</Label>
-              <Input
-                id="phone"
-                type="tel"
-                placeholder="XXX-XXX-XXXX"
-                value={phone}
-                onChange={handlePhoneChange}
-                className="text-lg tracking-wide"
-                disabled={isSubmitting}
-              />
-              <p className="text-xs text-muted-foreground">
-                US phone numbers only. Standard rates may apply.
-              </p>
-            </div>
-
-            <div className="flex gap-3">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => onOpenChange(false)}
-                className="flex-1"
-                disabled={isSubmitting}
-              >
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-                variant="hero"
-                className="flex-1"
-                disabled={isSubmitting || phone.replace(/\D/g, '').length !== 10}
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    Submitting...
-                  </>
-                ) : (
-                  <>
-                    <Phone className="h-4 w-4" />
-                    Call Me
-                  </>
-                )}
-              </Button>
-            </div>
-          </form>
-        )}
+        </div>
       </DialogContent>
     </Dialog>
   );
