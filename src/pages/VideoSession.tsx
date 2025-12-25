@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { LiveKitRoom, VideoConference, RoomAudioRenderer } from '@livekit/components-react';
-import '@livekit/components-styles';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, Phone, Loader2, Clock, AlertCircle } from 'lucide-react';
+
+// Lazy load LiveKit components to avoid build issues
+const LiveKitRoom = lazy(() => import('@livekit/components-react').then(mod => ({ default: mod.LiveKitRoom })));
+const VideoConference = lazy(() => import('@livekit/components-react').then(mod => ({ default: mod.VideoConference })));
+const RoomAudioRenderer = lazy(() => import('@livekit/components-react').then(mod => ({ default: mod.RoomAudioRenderer })));
 
 // Beyond Presence API configuration
 const BEY_API_URL = 'https://api.bey.dev/v1';
@@ -226,17 +229,23 @@ export default function VideoSession() {
 
       {/* Video Conference */}
       <div className="flex-1">
-        <LiveKitRoom
-          serverUrl={sessionData.livekitUrl}
-          token={sessionData.livekitToken}
-          connect={true}
-          onConnected={() => setIsConnected(true)}
-          onDisconnected={() => setIsConnected(false)}
-          style={{ height: '100vh' }}
-        >
-          <VideoConference />
-          <RoomAudioRenderer />
-        </LiveKitRoom>
+        <Suspense fallback={
+          <div className="flex h-screen items-center justify-center bg-background">
+            <Loader2 className="h-10 w-10 animate-spin text-primary" />
+          </div>
+        }>
+          <LiveKitRoom
+            serverUrl={sessionData.livekitUrl}
+            token={sessionData.livekitToken}
+            connect={true}
+            onConnected={() => setIsConnected(true)}
+            onDisconnected={() => setIsConnected(false)}
+            style={{ height: '100vh' }}
+          >
+            <VideoConference />
+            <RoomAudioRenderer />
+          </LiveKitRoom>
+        </Suspense>
       </div>
     </div>
   );
