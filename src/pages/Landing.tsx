@@ -22,7 +22,7 @@ import {
   Lock,
   Play
 } from 'lucide-react';
-import { useState } from 'react';
+import avatarPreview from '@/assets/avatar-preview.gif';
 
 const features = [
   {
@@ -101,8 +101,6 @@ const benefits = [
 ];
 
 export default function Landing() {
-  const [showAvatarPreview, setShowAvatarPreview] = useState(false);
-
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -239,94 +237,77 @@ export default function Landing() {
       </section>
 
       {/* AI Avatar Demo Section - HIGHLIGHTED */}
-      <section id="avatar-demo" className="py-20 bg-gradient-to-b from-primary/5 to-background relative overflow-hidden">
+      <section id="avatar-demo" className="py-20 bg-gradient-to-b from-[#2a2142] via-[#1e1a35] to-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/5 blur-3xl" />
+          <div className="absolute top-1/4 right-0 w-[400px] h-[400px] rounded-full bg-[#c8e94d]/20 blur-3xl" />
+          <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] rounded-full bg-primary/10 blur-3xl" />
         </div>
         
         <div className="container relative">
-          <div className="mx-auto max-w-2xl text-center mb-12">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-wellness/10 px-4 py-2 text-sm font-medium text-wellness">
-              <Sparkles className="h-4 w-4" />
-              Powered by Beyond Presence AI
-            </div>
-            <h2 className="font-heading text-3xl font-bold text-foreground md:text-5xl mb-4">
-              Meet Your AI Counselor
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Experience our lifelike AI avatar technology. Our counselors use advanced Beyond Presence 
-              technology to create natural, empathetic conversations that feel truly human.
-            </p>
-          </div>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left side - Text content */}
+            <div className="text-left">
+              <h2 className="font-heading text-3xl font-bold text-foreground md:text-5xl mb-6">
+                Add an Expressive Human Face to Your Conversational AI Agents
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                Powered by our proprietary foundation model, this real-time AI avatar 
+                technology delivers hyper-realistic, multilingual interactions, with response 
+                times &lt;100ms.
+              </p>
+              
+              <div className="flex flex-wrap gap-4 mb-10">
+                <Button variant="outline" size="lg" className="bg-[#c8e94d] text-[#1e1a35] border-none hover:bg-[#b8d93d] font-semibold">
+                  View Pricing
+                </Button>
+                <Button variant="outline" size="lg" className="bg-card/50 backdrop-blur-sm border-border/50 hover:bg-card">
+                  <Video className="h-4 w-4 mr-2" />
+                  Try our Demo
+                </Button>
+              </div>
 
-          {/* Avatar Preview */}
-          <div className="max-w-4xl mx-auto">
-            <div className="relative rounded-3xl overflow-hidden border-4 border-primary/20 shadow-elevated bg-card">
-              {showAvatarPreview ? (
-                <iframe 
-                  src="https://bey.chat/55590705-9528-4022-9550-70b724c962d8"
-                  width="100%"
-                  height="500"
-                  frameBorder="0"
-                  allowFullScreen
-                  allow="camera; microphone; fullscreen"
-                  style={{ border: 'none' }}
-                  title="AI Counselor Avatar Demo"
-                />
-              ) : (
-                <div 
-                  className="relative h-[500px] flex items-center justify-center bg-gradient-to-br from-primary/10 to-wellness/10 cursor-pointer group"
-                  onClick={() => setShowAvatarPreview(true)}
-                >
-                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800')] bg-cover bg-center opacity-20" />
-                  <div className="relative z-10 text-center">
-                    <div className="mb-6 mx-auto w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform shadow-glow">
-                      <Play className="h-12 w-12 text-primary ml-1" />
-                    </div>
-                    <h3 className="font-heading text-2xl font-bold text-foreground mb-2">
-                      Try Our AI Avatar Demo
-                    </h3>
-                    <p className="text-muted-foreground max-w-md mx-auto">
-                      Click to interact with our AI counselor avatar. Experience how natural and 
-                      understanding our technology can be.
-                    </p>
-                    <Button variant="hero" size="lg" className="mt-6" onClick={() => setShowAvatarPreview(true)}>
-                      Start Demo
-                      <ArrowRight className="h-4 w-4 ml-2" />
-                    </Button>
-                  </div>
+              {/* Feature list */}
+              <div className="space-y-3 mb-8">
+                <div className="flex items-center gap-3 text-muted-foreground">
+                  <Globe className="h-5 w-5 text-primary" />
+                  <span>Based on proprietary AI models</span>
                 </div>
-              )}
-            </div>
-            
-            <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border/50">
-                <Video className="h-4 w-4 text-primary" />
-                <span className="text-muted-foreground">Real-time video interaction</span>
+                <div className="flex items-center gap-3 text-muted-foreground">
+                  <Zap className="h-5 w-5 text-primary" />
+                  <span>Lightning fast latency</span>
+                </div>
+                <div className="flex items-center gap-3 text-muted-foreground">
+                  <Brain className="h-5 w-5 text-primary" />
+                  <span>Built for developers</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border/50">
-                <Brain className="h-4 w-4 text-wellness" />
-                <span className="text-muted-foreground">Emotion-aware responses</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border/50">
-                <MessageCircle className="h-4 w-4 text-calm" />
-                <span className="text-muted-foreground">Natural conversation</span>
-              </div>
-            </div>
-          </div>
 
-          {/* Beyond Presence attribution */}
-          <div className="mt-8 text-center">
-            <a 
-              href="https://www.beyondpresence.ai/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              <span>Powered by</span>
-              <span className="font-semibold text-foreground">Beyond Presence AI</span>
-              <ArrowRight className="h-3 w-3" />
-            </a>
+              {/* Beyond Presence attribution */}
+              <div className="flex items-center gap-2">
+                <a 
+                  href="https://www.beyondpresence.ai/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <span className="font-bold text-foreground text-lg">IIElevenLabs</span>
+                  <span>Partner</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Right side - Avatar GIF Preview */}
+            <div className="relative">
+              <div className="relative rounded-3xl overflow-hidden">
+                <img 
+                  src={avatarPreview} 
+                  alt="AI Avatar Demo - Expressive human face for conversational AI" 
+                  className="w-full h-auto object-cover rounded-3xl"
+                />
+                {/* Gradient overlay for blend effect */}
+                <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-[#2a2142]/50 pointer-events-none" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
