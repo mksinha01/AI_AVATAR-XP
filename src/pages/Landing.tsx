@@ -236,77 +236,25 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* AI Avatar Demo Section - HIGHLIGHTED */}
-      <section id="avatar-demo" className="py-20 bg-gradient-to-b from-[#2a2142] via-[#1e1a35] to-background relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 right-0 w-[400px] h-[400px] rounded-full bg-[#c8e94d]/20 blur-3xl" />
-          <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] rounded-full bg-primary/10 blur-3xl" />
-        </div>
-        
-        <div className="container relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left side - Text content */}
-            <div className="text-left">
-              <h2 className="font-heading text-3xl font-bold text-foreground md:text-5xl mb-6">
-                Add an Expressive Human Face to Your Conversational AI Agents
-              </h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                Powered by our proprietary foundation model, this real-time AI avatar 
-                technology delivers hyper-realistic, multilingual interactions, with response 
-                times &lt;100ms.
-              </p>
-              
-              <div className="flex flex-wrap gap-4 mb-10">
-                <Button variant="outline" size="lg" className="bg-[#c8e94d] text-[#1e1a35] border-none hover:bg-[#b8d93d] font-semibold">
-                  View Pricing
-                </Button>
-                <Button variant="outline" size="lg" className="bg-card/50 backdrop-blur-sm border-border/50 hover:bg-card">
-                  <Video className="h-4 w-4 mr-2" />
-                  Try our Demo
-                </Button>
-              </div>
-
-              {/* Feature list */}
-              <div className="space-y-3 mb-8">
-                <div className="flex items-center gap-3 text-muted-foreground">
-                  <Globe className="h-5 w-5 text-primary" />
-                  <span>Based on proprietary AI models</span>
-                </div>
-                <div className="flex items-center gap-3 text-muted-foreground">
-                  <Zap className="h-5 w-5 text-primary" />
-                  <span>Lightning fast latency</span>
-                </div>
-                <div className="flex items-center gap-3 text-muted-foreground">
-                  <Brain className="h-5 w-5 text-primary" />
-                  <span>Built for developers</span>
-                </div>
-              </div>
-
-              {/* Beyond Presence attribution */}
-              <div className="flex items-center gap-2">
-                <a 
-                  href="https://www.beyondpresence.ai/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <span className="font-bold text-foreground text-lg">IIElevenLabs</span>
-                  <span>Partner</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Right side - Avatar GIF Preview */}
-            <div className="relative">
-              <div className="relative rounded-3xl overflow-hidden">
-                <img 
-                  src={avatarPreview} 
-                  alt="AI Avatar Demo - Expressive human face for conversational AI" 
-                  className="w-full h-auto object-cover rounded-3xl"
-                />
-                {/* Gradient overlay for blend effect */}
-                <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-[#2a2142]/50 pointer-events-none" />
-              </div>
+      {/* AI Avatar Preview Section */}
+      <section id="avatar-demo" className="py-16">
+        <div className="container">
+          <div className="mx-auto max-w-2xl text-center mb-10">
+            <h2 className="font-heading text-3xl font-bold text-foreground md:text-4xl mb-4">
+              Meet Your AI Counselor
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Experience our lifelike AI avatar technology powered by Beyond Presence AI.
+            </p>
+          </div>
+          
+          <div className="max-w-3xl mx-auto">
+            <div className="rounded-3xl overflow-hidden shadow-elevated border border-border/50">
+              <img 
+                src={avatarPreview} 
+                alt="AI Avatar Demo" 
+                className="w-full h-auto"
+              />
             </div>
           </div>
         </div>
