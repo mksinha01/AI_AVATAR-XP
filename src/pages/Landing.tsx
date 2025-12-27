@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { 
@@ -99,6 +100,33 @@ const benefits = [
   { icon: CheckCircle, title: 'Evidence-Based', desc: 'Proven counseling techniques' },
   { icon: Heart, title: 'Empathetic AI', desc: 'Understanding & compassionate' },
 ];
+
+// Component to make GIF loop continuously
+function LoopingGif({ src, alt }: { src: string; alt: string }) {
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    // Restart GIF every 8 seconds to ensure continuous looping
+    const interval = setInterval(() => {
+      if (imgRef.current) {
+        const currentSrc = imgRef.current.src;
+        imgRef.current.src = '';
+        imgRef.current.src = currentSrc;
+      }
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <img
+      ref={imgRef}
+      src={src}
+      alt={alt}
+      className="w-full h-auto"
+    />
+  );
+}
 
 export default function Landing() {
   return (
@@ -250,11 +278,7 @@ export default function Landing() {
           
           <div className="max-w-3xl mx-auto">
             <div className="rounded-3xl overflow-hidden shadow-elevated border border-border/50">
-              <img 
-                src={avatarPreview} 
-                alt="AI Avatar Demo" 
-                className="w-full h-auto"
-              />
+              <LoopingGif src={avatarPreview} alt="AI Avatar Demo" />
             </div>
           </div>
         </div>
