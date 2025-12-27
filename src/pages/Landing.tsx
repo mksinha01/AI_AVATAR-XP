@@ -172,60 +172,101 @@ export default function Landing() {
           <div className="absolute -bottom-1/4 -right-1/4 h-[600px] w-[600px] rounded-full bg-wellness/5 blur-3xl animate-pulse-soft" style={{ animationDelay: '1.5s' }} />
         </div>
 
-        <div className="container relative py-20 md:py-32">
-          <div className="mx-auto max-w-4xl text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary animate-fade-in">
-              <Sparkles className="h-4 w-4" />
-              AI-Powered Mental Health Support for Students
-            </div>
-            
-            <h1 className="mb-6 font-heading text-4xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl animate-slide-up">
-              Your Personal AI Counselor,{' '}
-              <span className="bg-gradient-to-r from-primary via-wellness to-calm bg-clip-text text-transparent">
-                Available 24/7
-              </span>
-            </h1>
-            
-            <p className="mb-10 text-lg text-muted-foreground md:text-xl max-w-2xl mx-auto animate-slide-up" style={{ animationDelay: '0.1s' }}>
-              Get confidential mental health support, career guidance, and academic advice 
-              through video or voice calls with our understanding AI counselors. 
-              <strong className="text-foreground"> No appointments, no waiting, no judgment.</strong>
-            </p>
-            
-            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center animate-slide-up" style={{ animationDelay: '0.2s' }}>
-              <Button variant="hero" size="xl" asChild className="shadow-glow">
-                <Link to="/login">
-                  Get Started Free
-                  <ArrowRight className="h-5 w-5 ml-2" />
-                </Link>
-              </Button>
-              <Button variant="outline" size="xl" asChild>
-                <a href="#avatar-demo">
-                  <Play className="h-5 w-5 mr-2" />
-                  See AI Avatar Demo
-                </a>
-              </Button>
+        <div className="container relative py-12 md:py-20">
+          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-200px)]">
+            {/* Left Side - Text Content */}
+            <div className="space-y-8 animate-slide-up">
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary animate-fade-in">
+                <Sparkles className="h-4 w-4" />
+                AI-Powered Mental Health Support for Students
+              </div>
+              
+              <h1 className="font-heading text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl xl:text-7xl animate-slide-up">
+                Your Personal AI Counselor,{' '}
+                <span className="bg-gradient-to-r from-primary via-wellness to-calm bg-clip-text text-transparent">
+                  Available 24/7
+                </span>
+              </h1>
+              
+              <p className="text-lg text-muted-foreground md:text-xl animate-slide-up" style={{ animationDelay: '0.1s' }}>
+                Get confidential mental health support, career guidance, and academic advice 
+                through video or voice calls with our understanding AI counselors. 
+                <strong className="text-foreground"> No appointments, no waiting, no judgment.</strong>
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+                <Button variant="hero" size="xl" asChild className="shadow-glow">
+                  <Link to="/login">
+                    Get Started Free
+                    <ArrowRight className="h-5 w-5 ml-2" />
+                  </Link>
+                </Button>
+                <Button variant="outline" size="xl" asChild>
+                  <a href="#features">
+                    <Play className="h-5 w-5 mr-2" />
+                    Learn More
+                  </a>
+                </Button>
+              </div>
+
+              {/* Trust badges */}
+              <div className="flex flex-wrap gap-6 text-sm text-muted-foreground animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                <div className="flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-primary" />
+                  <span>End-to-End Encrypted</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Lock className="h-5 w-5 text-wellness" />
+                  <span>HIPAA Compliant</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-calm" />
+                  <span>Evidence-Based Approach</span>
+                </div>
+              </div>
             </div>
 
-            {/* Trust badges */}
-            <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-muted-foreground animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <div className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-primary" />
-                <span>End-to-End Encrypted</span>
+            {/* Right Side - AI Avatar Demo */}
+            <div className="relative animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <div className="relative rounded-3xl overflow-hidden shadow-elevated border border-border/50 bg-card">
+                <div className="absolute top-4 left-4 z-10">
+                  <div className="flex items-center gap-2 rounded-full bg-background/80 backdrop-blur-sm px-3 py-1.5 text-sm font-medium">
+                    <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                    <span>Live Demo</span>
+                  </div>
+                </div>
+                <LoopingGif src={avatarPreview} alt="AI Avatar Demo" />
               </div>
-              <div className="flex items-center gap-2">
-                <Lock className="h-5 w-5 text-wellness" />
-                <span>HIPAA Compliant</span>
+              
+              {/* Floating feature cards */}
+              <div className="absolute -bottom-4 -left-4 rounded-2xl bg-card/90 backdrop-blur-sm border border-border p-4 shadow-lg hidden md:block animate-float">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+                    <MessageCircle className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-sm">Real-time Chat</p>
+                    <p className="text-xs text-muted-foreground">Instant responses</p>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-calm" />
-                <span>Evidence-Based Approach</span>
+              
+              <div className="absolute -top-4 -right-4 rounded-2xl bg-card/90 backdrop-blur-sm border border-border p-4 shadow-lg hidden md:block animate-float" style={{ animationDelay: '1s' }}>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-wellness/10">
+                    <Video className="h-5 w-5 text-wellness" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-sm">Video Sessions</p>
+                    <p className="text-xs text-muted-foreground">Face-to-face support</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="mt-20 grid grid-cols-2 gap-8 md:grid-cols-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+          <div className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-4 animate-fade-in" style={{ animationDelay: '0.5s' }}>
             {[
               { value: '50K+', label: 'Students Helped' },
               { value: '24/7', label: 'Availability' },
@@ -260,26 +301,6 @@ export default function Landing() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* AI Avatar Preview Section */}
-      <section id="avatar-demo" className="py-16">
-        <div className="container">
-          <div className="mx-auto max-w-2xl text-center mb-10">
-            <h2 className="font-heading text-3xl font-bold text-foreground md:text-4xl mb-4">
-              Meet Your AI Counselor
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Experience our lifelike AI avatar technology powered by Beyond Presence AI.
-            </p>
-          </div>
-          
-          <div className="max-w-3xl mx-auto">
-            <div className="rounded-3xl overflow-hidden shadow-elevated border border-border/50">
-              <LoopingGif src={avatarPreview} alt="AI Avatar Demo" />
-            </div>
           </div>
         </div>
       </section>

@@ -13,22 +13,30 @@ interface CounselorCardProps {
   onVideoCall: () => void;
 }
 
+// Import agent photos from local assets
+import healthWellnessPhoto from '@/data/photo_agent/Dr. Priya Sharma.png';
+import careerGuidancePhoto from '@/data/photo_agent/Arjun Mehta.png';
+import academicSupportPhoto from '@/data/photo_agent/Dr. Anjali Reddy.png';
+import financialAdvicePhoto from '@/data/photo_agent/Rahul_Kapoor.png';
+import socialRelationshipsPhoto from '@/data/photo_agent/Neha Patel.png';
+import personalDevelopmentPhoto from '@/data/photo_agent/Rohan_Gupta.png';
+
 const avatarImages: Record<string, string> = {
-  'health-wellness': 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&h=200&fit=crop&crop=face',
-  'career-guidance': 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=face',
-  'academic-support': 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=face',
-  'financial-advice': 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
-  'social-relationships': 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop&crop=face',
-  'personal-development': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face',
+  'health-wellness': healthWellnessPhoto,
+  'career-guidance': careerGuidancePhoto,
+  'academic-support': academicSupportPhoto,
+  'financial-advice': financialAdvicePhoto,
+  'social-relationships': socialRelationshipsPhoto,
+  'personal-development': personalDevelopmentPhoto,
 };
 
 const counselorNames: Record<string, string> = {
-  'health-wellness': 'Dr. Sarah',
-  'career-guidance': 'Alex',
-  'academic-support': 'Dr. Maya',
-  'financial-advice': 'James',
-  'social-relationships': 'Emma',
-  'personal-development': 'Michael',
+  'health-wellness': 'Dr. Priya Sharma',
+  'career-guidance': 'Arjun Mehta',
+  'academic-support': 'Dr. Anjali Reddy',
+  'financial-advice': 'Rahul Kapoor',
+  'social-relationships': 'Neha Patel',
+  'personal-development': 'Rohan Gupta',
 };
 
 export function CounselorCard({

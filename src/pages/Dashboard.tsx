@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Header } from '@/components/layout/Header';
 import { CounselorCard } from '@/components/counselors/CounselorCard';
 import { PhoneCallDialog } from '@/components/calls/PhoneCallDialog';
+import { VideoCallDialog } from '@/components/calls/VideoCallDialog';
 import { useAuth } from '@/contexts/AuthContext';
 import { 
   Heart, 
@@ -63,6 +64,7 @@ export default function Dashboard() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [phoneDialogOpen, setPhoneDialogOpen] = useState(false);
+  const [videoDialogOpen, setVideoDialogOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
 
   const handleVoiceCall = (categoryId: string) => {
@@ -71,7 +73,12 @@ export default function Dashboard() {
   };
 
   const handleVideoCall = (categoryId: string) => {
-    navigate(`/video-session/${categoryId}`);
+    setSelectedCategory(categoryId);
+    setVideoDialogOpen(true);
+  };
+
+  const handleConfirmVideoAgent = () => {
+    navigate(`/video-session/${selectedCategory}`);
   };
 
   const getGreeting = () => {
@@ -124,7 +131,7 @@ export default function Dashboard() {
         </div>
 
         {/* Info section */}
-        <div className="mt-12 rounded-2xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm animate-slide-up" style={{ animationDelay: '0.6s' }}>
+        <div className="mt-12 rounded-2xl border border-border/50 bg-card/50 p-6 back   op-blur-sm animate-slide-up" style={{ animationDelay: '0.6s' }}>
           <h2 className="font-heading text-lg font-semibold text-foreground mb-2">
             How it works
           </h2>
@@ -164,6 +171,13 @@ export default function Dashboard() {
         open={phoneDialogOpen}
         onOpenChange={setPhoneDialogOpen}
         counselorCategory={selectedCategory}
+      />
+
+      <VideoCallDialog
+        open={videoDialogOpen}
+        onOpenChange={setVideoDialogOpen}
+        counselorCategory={selectedCategory}
+        onConfirmAgent={handleConfirmVideoAgent}
       />
     </div>
   );
