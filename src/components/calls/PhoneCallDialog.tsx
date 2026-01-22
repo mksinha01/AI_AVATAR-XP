@@ -14,7 +14,7 @@ interface PhoneCallDialogProps {
   counselorCategory: string;
 }
 
-const N8N_FORM_URL = 'http://localhost:5678/form/0751fa66-da39-4b7a-8d29-c0b9e8d4f722';
+const N8N_FORM_URL = 'https://ai-avatar.app.n8n.cloud/form/76b39cad-0356-4916-8b87-fde9c4f4e336';
 
 const categoryNames: Record<string, string> = {
   'health-wellness': 'Health & Wellness',
